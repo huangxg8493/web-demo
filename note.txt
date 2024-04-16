@@ -1,0 +1,7 @@
+git config --global user.name "username"
+git config --global user.email "xxxxx@qq.com"
+
+ssh-keygen -t rsa -C "xxxx@qq.com"
+
+
+tortise
