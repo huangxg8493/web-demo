@@ -2,6 +2,9 @@ git config --global user.name "username"
 git config --global user.email "xxxxx@qq.com"
 
 ssh-keygen -t rsa -C "xxxx@qq.com"
+<<<<<<< HEAD
 
 
 tortise
+=======
+>>>>>>> f3170bbd59babd6cd915f69151f0dae289e31a76
