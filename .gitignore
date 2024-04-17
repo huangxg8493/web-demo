@@ -1,0 +1,9 @@
+.idea
+.idea/
+*.xml
+gen
+/*.log
+*.log
+target/
+.gradle
+build/
