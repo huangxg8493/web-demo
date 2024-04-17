@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BPMN.js Example</title>
+    <script src="/lib/bpmn/17.0.2/bpmn-modeler.development.js"></script>
+    <link rel="stylesheet" href="/lib/bpmn/17.0.2/assets/diagram-js.css"/>
+    <link rel="stylesheet" href="/lib/bpmn/17.0.2/assets/bpmn-font/css/bpmn.css"/>
+    <script src="xmlStr.js"></script>
+    <style>
+        .modeler {
+            width: 100%;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+<div id="canvas" class="modeler"></div>
+<script>
+    let bpmnJS = new BpmnJS({
+        container: '#canvas'
+    });
+
+    bpmnJS.importXML(xml);
+</script>
+</body>
+</html>
