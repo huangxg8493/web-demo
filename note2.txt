@@ -109,3 +109,10 @@ BpmnKeyboardBindings
 
 CreateMoveSnapping
 BpmnCreateMoveSnapping
+
+
+Properties
+
+Moddle
+ClassList
+ClassList$1

@@ -5,3 +5,54 @@ ssh-keygen -t rsa -C "xxxx@qq.com"
 
 ssh -T git@github.com
 
+JS  IOC
+https://github.com/nikku/didi
+https://segmentfault.com/a/1190000042100669?utm_source=sf-similar-article
+
+ECMAScript把对象定义为：无序属性的集合，其属性可以包含基本值、对象或者函数。
+也就是说对象是一组没有特定顺序的值，每个属性或方法都有一个名字，而名字都映射到一个值。
+我们可以把它想象成散列表：无非就是一个名值对，其中值可以是数据或函数。
+
+对象到底是什么？我们从两个层次来理解
+（1） 对象是单个实物的抽象
+    一本书、一个人、一辆汽车都可以是对象，一个数据库、一张网页、一个远程服务器连接也可以是对象。
+    当实物被抽象成对象，实物之间的关系就变成了对象之间的关系，从而可以模拟现实情况，针对对象进行编程。
+（2） 对象是一个容器，封装了属性（property）和方法（method）
+    属性是对象的状态，方法是对象的行为（完成某种任务）。比如，我们可以把动物抽象为animal对象，
+    使用“属性”记录具体是哪一种动物，使用“方法”表示动物的某种行为（奔跑、狩猎、休息等）
+对象简单来说就是一组“键值对”（key-value）的集合
+关于键名：对象的所有键名都是字符串（es6引入了Symbol值也可以作为键名）so，你会看到下面这种对象，
+而对象的键值可以是任何数据类型
+
+函数是第一等公民
+    javascript语言将函数看作一种值，与其他值（number、string、boolean等）地位相同，凡是可以使用值的地方，都可以使用函数。
+    比如，可以把函数赋值给变量或对象的属性，也可以当作参数传入其他函数或作为函数的返回值返回。由于与其他数据类型地位平等，
+    所以在javascript语言中函数是第一等公民。
+
+函数的属性和方法
+1，name 属性，函数的name属性返回函数的名字
+    function print() {}
+    print.name // 'print'
+    let add = function() {}
+    add.name // 'add'
+2，length 属性，返回函数预期传入的参数个数，而不管调用的时候到底传入了几个参数
+    function print(a, b) {}
+    print.length // 始终都是2
+    // length属性提供了一种机制，判断定义和调用时的差异，以便实现面向对象编程的“方法重载”
+3，toString 方法，函数的toString方法返回一个字符串，内容是函数的源码
+    function f() {
+      a();
+      b();
+      c();
+    }
+    f.toString()
+    // function f() {
+    //  a();
+    //  b();
+    //  c();
+    // }
+对于那些原生的函数，toString()方法返回function (){[native code]}。
+    Math.sqrt.toString()
+    // "function sqrt() { [native code] }"
+    上面代码中，Math.sqrt是javascript引擎提供的原生函数，toString()方法就返回原生代码的提示。
+

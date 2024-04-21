@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bpmn.js Example</title>
+    <script src="/bpmn03/bpmn.js"></script>
+    <link rel="stylesheet" href="/lib/bpmn/17.0.2/assets/diagram-js.css"/>
+    <link rel="stylesheet" href="/lib/bpmn/17.0.2/assets/bpmn-font/css/bpmn.css"/>
+    <script src="/bpmn02/xmlStr2.js"></script>
+    <style>
+        #canvas {
+            width: 100%;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+
+<!-- 用于渲染BPMN图表的容器 -->
+<div id="canvas"></div>
+
+<script>
+    let bpmnModeler = new BpmnJS({
+        container: '#canvas'
+    });
+
+    bpmnModeler.importXML(xml, null, function (err, warns) {
+        err && console.log(err)
+        warns && console.log(warns)
+    });
+</script>
+
+</body>
+</html>
