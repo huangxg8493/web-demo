@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="/lib/didi/10.2.2/lib.js"></script>
+
+<script>
+    function Car(engine) {
+        this.start = function () {
+            engine.start();
+        };
+    }
+
+    function createPetrolEngine(power) {
+        return {
+            start: function () {
+                console.log('Starting engine with ' + power + 'hp');
+            }
+        };
+    }
+
+    const carModule = {
+        'car': ['type', Car],
+        'engine': ['factory', createPetrolEngine],
+        'power': ['value', 1148]
+    };
+
+    const injector = new Injector([carModule])
+    injector.get('car').start();
+    injector.invoke(function (car) {
+        console.log('started', car);
+    });
+</script>
+
+</body>
+</html>
