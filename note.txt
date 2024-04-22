@@ -9,6 +9,11 @@ JS  IOC
 https://github.com/nikku/didi
 https://segmentfault.com/a/1190000042100669?utm_source=sf-similar-article
 
+npm cache clean --force
+npm config get registry
+npm config set registry https://registry.npm.taobao.org/
+npm config set strict-ssl false
+
 ECMAScript把对象定义为：无序属性的集合，其属性可以包含基本值、对象或者函数。
 也就是说对象是一组没有特定顺序的值，每个属性或方法都有一个名字，而名字都映射到一个值。
 我们可以把它想象成散列表：无非就是一个名值对，其中值可以是数据或函数。
