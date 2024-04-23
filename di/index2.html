@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>DIDI TEST02</h1>
+<script src="/lib/didi/10.2.2/lib.js"></script>
+
+<script language="JavaScript">
+    const fn = function (a, b) {
+        return null;
+    };
+
+    annotate('aa', 'bb', fn);
+    console.log(fn)
+    console.log(fn.$inject)
+
+    console.log('*****************************')
+    const fn2 = function (a, b) {
+        return a + b;
+    };
+    annotate(['aa', 'bb', fn2]);
+    console.log(fn2)
+    console.log(fn2.$inject)
+    console.log('*****************************')
+
+    class Foo {
+        constructor(a, b) {
+            this.a = a
+            this.b = b
+        }
+    }
+
+    annotate('aa', 'bb', Foo);
+    console.log(Foo)
+    console.log(Foo.$inject)
+    console.log('*****************************')
+
+    const fn3 = (a, b) => a + b;
+    annotate('aa', 'bb', fn3);
+    console.log(fn3, typeof fn3)
+    console.log(fn3.$inject)
+    console.log('*****************************')
+</script>
+
+</body>
+</html>

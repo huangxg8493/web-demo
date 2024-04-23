@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>DIDI TEST03</h1>
+<script src="/lib/didi/10.2.2/lib.js"></script>
+
+<script language="JavaScript">
+    class BubType {
+        constructor() {
+            this.name = 'bub';
+        }
+    };
+
+    function BazType() {
+        this.name = 'baz';
+    }
+
+    const injector = new Injector([
+        {
+            foo: [
+                'factory', function () {
+                    return 'foo-value'
+                }
+            ],
+            bar: ['value', 'bar-value'],
+            baz: ['type', BazType],
+            bub: ['type', BubType]
+        }
+    ]);
+
+    console.log(injector.get('foo'))
+    console.log(injector.get('bar'))
+
+    const bub = injector.get('bub');
+    console.log(typeof bub, bub.name)
+    console.log(bub instanceof BubType)
+    console.log(Object.prototype.toString.call(bub))
+    console.log(bub.constructor)
+
+    const baz = injector.get('baz')
+    console.log(typeof baz, baz.name)
+    console.log(baz instanceof BazType)
+    console.log(Object.prototype.toString.call(baz))
+    console.log(baz.constructor)
+
+    const b = new BubType();
+    console.log(b instanceof BubType)
+    console.log(Object.prototype.toString.call(b))
+    console.log(b.constructor)
+
+</script>
+
+</body>
+</html>
