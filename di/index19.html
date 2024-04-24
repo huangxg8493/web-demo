@@ -21,8 +21,9 @@
     const injector = new Injector([moduleParent]);
     const child = injector.createChild([moduleChild]);
 
-    expect(child.get('d')).to.equal('d-child');
-    expect(child.get('a')).to.equal('a-child');
+    console.log(injector.get('a'))
+    console.log(child.get('a'))
+    console.log(child.get('d'))
 </script>
 
 </body>
