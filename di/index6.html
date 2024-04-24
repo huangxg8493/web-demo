@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>DIDI TEST06-should reuse module</h1>
+<script src="/lib/didi/10.2.2/lib.js"></script>
+
+<script language="JavaScript">
+    class FooType {
+        constructor() {
+            this.name = 'foo';
+        }
+    }
+
+    function barFactory(foo) {
+        return foo;
+    }
+
+    const module = {
+        foo: ['type', [FooType]],
+        bar: ['factory', ['foo', barFactory]],// foo作为参数
+    };
+
+    const injector1 = new Injector([module]);
+    console.log(1, injector1.get('foo'), injector1.get('foo') === injector1.get('bar'))
+
+    const injector2 = new Injector([module]);
+    console.log(2, injector2.get('foo'), injector2.get('foo') === injector2.get('bar'))
+</script>
+
+</body>
+</html>

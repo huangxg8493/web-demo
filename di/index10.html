@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>DIDI TEST10-should inject properties</h1>
+<script src="/lib/didi/10.2.2/lib.js"></script>
+
+<script language="JavaScript">
+    const module = {
+        config: ['value', {
+            a: 1,
+            b: {
+                c: 2
+            }
+        }]
+    };
+
+    const injector = new Injector([module]);
+    console.log(1, injector.get('config'))
+    console.log(2, injector.get('config.a'))
+    console.log(3, injector.get('config.b'))
+    console.log(4, injector.get('config.b.c'))
+
+    // should inject dotted service if present
+    const module2 = {
+        'a.b': ['value', 'a.b value']
+    };
+
+    const injector2 = new Injector([module2]);
+    console.log(5, injector2.get('a.b'))
+
+    // should provide "injector"
+    const injector3 = new Injector([]);
+    console.log(6, injector3.get('injector'), injector3.get('injector') === injector3)
+
+    // should throw error with full path if no provider
+    // a requires b requires c (not provided)
+    function aFn(b) {
+        return 'a-value';
+    }
+
+    aFn.$inject = ['b'];
+
+    function bFn(c) {
+        return 'b-value';
+    }
+
+    bFn.$inject = ['c'];
+
+    const module4 = {
+        a: ['factory', aFn],
+        b: ['factory', bFn]
+    };
+
+    const injector4 = new Injector([module4]);
+
+    console.log(7, injector4.get('a'))
+</script>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>DIDI TEST14-should throw error if a non function given</h1>
+<script src="/lib/didi/10.2.2/lib.js"></script>
+
+<script language="JavaScript">
+    const injector = new Injector([]);
+
+    try {
+        injector.invoke(123);
+    } catch (e) {
+        console.log(e);
+    }
+
+    try {
+        injector.invoke('abc');
+    } catch (e) {
+        console.log(e);
+    }
+
+    try {
+        injector.invoke(null);
+    } catch (e) {
+        console.log(e);
+    }
+
+    try {
+        injector.invoke(void 0);
+    } catch (e) {
+        console.log(e);
+    }
+
+    try {
+        injector.invoke({});
+    } catch (e) {
+        console.log(e);
+    }
+</script>
+
+</body>
+</html>

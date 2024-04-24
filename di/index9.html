@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>DIDI TEST09-should resolve dependencies (array notation)</h1>
+<script src="/lib/didi/10.2.2/lib.js"></script>
+
+<script language="JavaScript">
+    class Foo {
+        constructor(bar1, baz1) {
+            this.bar = bar1;
+            this.baz = baz1;
+        }
+    }
+
+    const bar = function (baz, abc) {
+        return {
+            baz: baz,
+            abc: abc
+        };
+    };
+
+    const module = {
+        foo: ['type', ['bar', 'baz', Foo]],
+        bar: ['factory', ['baz', 'abc', bar]],
+        baz: ['value', 'baz-value'],
+        abc: ['value', 'abc-value']
+    };
+
+    const injector = new Injector([module]);
+    const fooInstance = injector.get('foo');
+    console.log(1, fooInstance)
+    console.log(2, fooInstance.bar)
+    console.log(3, fooInstance.baz)
+</script>
+
+</body>
+</html>

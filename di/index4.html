@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>DIDI TEST04-should always return the same instance</h1>
+<script src="/lib/didi/10.2.2/lib.js"></script>
+
+<script language="JavaScript">
+    class BazType {
+        constructor() {
+            this.name = 'baz';
+        }
+    }
+
+    const injector = new Injector([{
+        foo: ['factory', function () {
+            return {
+                name: 'foo'
+            };
+        }],
+        bar: ['value', 'bar value'],
+        baz: ['type', BazType],
+    }]);
+
+    console.log(1, injector.get('foo'), injector.get('foo') === injector.get('foo'))
+    console.log(2, injector.get('bar'), injector.get('bar') === injector.get('bar'))
+    console.log(3, injector.get('baz'), injector.get('baz') === injector.get('baz'))
+</script>
+
+</body>
+</html>

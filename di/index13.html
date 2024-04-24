@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>DIDI TEST13-should invoke function on given context</h1>
+<script src="/lib/didi/10.2.2/lib.js"></script>
+
+<script language="JavaScript">
+    const context = {};
+    const injector = new Injector([]);
+
+    injector.invoke((function () {
+        console.log(this)
+        console.log(this === context)
+    }), context);
+</script>
+
+</body>
+</html>

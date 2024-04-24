@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>DIDI TEST12-should resolve dependencies (array notation)</h1>
+<script src="/lib/didi/10.2.2/lib.js"></script>
+
+<script language="JavaScript">
+    // should resolve dependencies (array notation)
+    function bar(a, b) {
+        return {
+            baz: a,
+            abc: b
+        };
+    }
+
+    const module = {
+        baz: ['value', 'baz-value'],
+        abc: ['value', 'abc-value']
+    };
+
+    const injector = new Injector([module]);
+
+    const result = injector.invoke(['baz', 'abc', bar]);
+    console.log(result)
+</script>
+
+</body>
+</html>

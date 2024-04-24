@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>DIDI TEST16-should resolve with local overrides</h1>
+<script src="/lib/didi/10.2.2/lib.js"></script>
+
+<script language="JavaScript">
+    class FooType {
+        constructor() {
+            throw new Error('foo broken');
+        }
+    }
+
+    const injector = new Injector([
+        {
+            foo: ['type', FooType]
+        }
+    ]);
+
+    injector.invoke(['foo', 'bar', function (foo, bar) {
+        console.log(foo)
+        console.log(bar)
+    }], null, {foo: 'FOO', bar: undefined});
+</script>
+
+</body>
+</html>

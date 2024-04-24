@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>DIDI TEST07-should reuse inject fn</h1>
+<script src="/lib/didi/10.2.2/lib.js"></script>
+
+<script language="JavaScript">
+    class FooType {
+        constructor() {
+            this.name = 'foo';
+        }
+    }
+
+    function barFactory(foo) {
+        return foo;
+    }
+
+    const module = {
+        'foo': ['type', [FooType]],
+        'bar': ['factory', ['foo', barFactory]]
+    };
+
+    const injector = new Injector([module]);
+
+    function fn(foo, bar) {
+        console.log(foo === injector.get('foo'))
+        console.log(bar === injector.get('bar'))
+    }
+
+    injector.invoke(['foo', 'bar', fn]);
+    injector.invoke(['foo', 'bar', fn]);
+</script>
+
+</body>
+</html>

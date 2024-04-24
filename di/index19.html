@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>DIDI TEST19-should inject from child</h1>
+<script src="/lib/didi/10.2.2/lib.js"></script>
+
+<script language="JavaScript">
+    const moduleParent = {
+        a: ['value', 'a-parent']
+    };
+
+    const moduleChild = {
+        a: ['value', 'a-child'],
+        d: ['value', 'd-child']
+    };
+
+    const injector = new Injector([moduleParent]);
+    const child = injector.createChild([moduleChild]);
+
+    expect(child.get('d')).to.equal('d-child');
+    expect(child.get('a')).to.equal('a-child');
+</script>
+
+</body>
+</html>

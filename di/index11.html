@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>DIDI TEST11-should return null if non-strict and no provider</h1>
+<script src="/lib/didi/10.2.2/lib.js"></script>
+
+<script language="JavaScript">
+    // should return null if non-strict and no provider
+    const injector = new Injector([]);
+    const notDefined = injector.get('not-defined', false);
+    console.log(1, notDefined === null)
+
+    // should throw error if circular dependency
+    function aFn(b) {
+        return 'a-value';
+    }
+
+    function bFn(a) {
+        return 'b-value';
+    }
+
+    const module2 = {
+        a: ['factory', ['b', aFn]],
+        b: ['factory', ['a', bFn]],
+    };
+    const injector2 = new Injector([module2]);
+    try {
+        injector2.get('a')
+    } catch (e) {
+        console.log(2, e)
+    }
+
+    //invoke should resolve dependencies
+    function bar(baz, abc) {
+        return {
+            baz: baz,
+            abc: abc
+        };
+    }
+
+    bar.$inject = ['baz', 'abc'];
+    const module3 = {
+        baz: ['value', 'baz-value'],
+        abc: ['value', 'abc-value']
+    }
+    const injector3 = new Injector([module3]);
+    const t = injector3.invoke(bar);
+    console.log(3, t)
+</script>
+
+</body>
+</html>

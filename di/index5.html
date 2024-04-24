@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>DIDI TEST05</h1>
+<script src="/lib/didi/10.2.2/lib.js"></script>
+
+<script language="JavaScript">
+    class BazType {
+        constructor() {
+            this.name = 'baz';
+        }
+    }
+
+    const injector = new Injector([{
+        foo: ['factory', function () {
+            return {
+                name: 'foo'
+            };
+        }],
+        bar: ['value', 'bar value'],
+        baz: ['type', BazType],
+    }]);
+
+    console.log(1, injector.get('foo'))
+    console.log(2, injector.get('bar'))
+    console.log(3, injector.get('baz'))
+
+    let baz = injector.get('baz');
+    console.log(4, Object.prototype.toString.call(baz))
+    console.log(4.1, baz instanceof BazType)
+    // default to strict=true
+    console.log(5, injector.get('bar', true))
+</script>
+
+</body>
+</html>

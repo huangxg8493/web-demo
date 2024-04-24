@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>DIDI TEST18-should return returned value from constructor if an object returned</h1>
+<script src="/lib/didi/10.2.2/lib.js"></script>
+
+<script language="JavaScript">
+    const injector = new Injector([]);
+    const returnedObj = {};
+
+    function ObjCls() {
+        return returnedObj;
+    }
+
+    function StringCls() {
+        return 'some string';
+    }
+
+    function NumberCls() {
+        return 123;
+    }
+
+    console.log(injector.instantiate(ObjCls))
+    console.log(injector.instantiate(StringCls))
+    console.log(injector.instantiate(NumberCls))
+    console.log(injector.instantiate(['injector', NumberCls]))
+</script>
+
+</body>
+</html>

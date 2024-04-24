@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>DIDI TEST17-should resolve dependencies</h1>
+<script src="/lib/didi/10.2.2/lib.js"></script>
+
+<script language="JavaScript">
+    class Foo {
+        constructor(abc1, baz1) {
+            this.abc = abc1;
+            this.baz = baz1;
+        }
+    }
+
+    Foo.$inject = ['abc', 'baz'];
+
+    const module = {
+        baz: ['value', 'baz-value'],
+        abc: ['value', 'abc-value']
+    };
+
+    const injector = new Injector([module]);
+
+    let t = injector.instantiate(Foo);
+    console.log(t)
+</script>
+
+</body>
+</html>
