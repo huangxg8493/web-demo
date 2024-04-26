@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>DIDI TEST34-override-should mock element via value</h1>
+<script src="/lib/didi/10.2.2/lib.js"></script>
+
+<script language="JavaScript">
+    function createBar() {
+        return {a: 'realA'}
+    }
+
+    const base = {bar: ['factory', createBar]}
+
+    const mocked = {a: 'A'}
+
+    const mock = {bar: ['value', mocked]}
+
+    const injector = new Injector([base, mock]);
+    console.log(injector.get('bar'))
+</script>
+
+</body>
+</html>

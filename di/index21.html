@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>DIDI TEST21-should inject from parent but never use dependency from child</h1>
+<script src="/lib/didi/10.2.2/lib.js"></script>
+
+<script language="JavaScript">
+    const moduleParent = {
+        b: ['factory', function (c) {
+            return 'b-parent';
+        }]
+    }
+
+    const moduleChild = {
+        c: ['value', 'c-child']
+    };
+
+    const injector = new Injector([moduleParent]);
+    const child = injector.createChild([moduleChild]);
+
+    try {
+        child.get('b')
+    } catch (e) {
+        console.log(e)
+    }
+
+    try {
+        injector.get('b')
+    } catch (e) {
+        console.log(e)
+    }
+
+</script>
+
+</body>
+</html>

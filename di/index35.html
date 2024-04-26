@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>DIDI TEST35-initialize (__init__)-should init component</h1>
+<script src="/lib/didi/10.2.2/lib.js"></script>
+
+<script language="JavaScript">
+    // given
+    const injector = new Injector([
+        {
+            __init__: ['foo'],
+            'foo': ['factory', function (bar) {
+                bar.initialized = true;
+                return bar;
+            }],
+            'bar': ['value', {}]
+        }
+    ]);
+
+    // when
+    injector.init();
+    const bar = injector.get('bar');
+    // then
+    console.log(bar, bar.initialized)
+</script>
+
+</body>
+</html>

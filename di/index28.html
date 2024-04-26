@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>DIDI TEST28-additional __modules__-should load</h1>
+<script src="/lib/didi/10.2.2/lib.js"></script>
+
+<script language="JavaScript">
+    const otherModule = {
+        'bar': ['value', 'bar-from-other-module']
+    }
+
+    const injector = new Injector([
+        {
+            __exports__: ['foo'],
+            __modules__: [otherModule],
+            'foo': ['factory',
+                function (bar) {
+                    return {
+                        bar: bar
+                    };
+                }
+            ]
+        }
+    ])
+    const foo = injector.get('foo');
+    console.log(foo)
+
+    try {
+        console.log(injector.get('bar'))
+    } catch (e) {
+        console.log(e);//No provider for "bar"! (Resolving: bar)
+    }
+</script>
+
+</body>
+</html>

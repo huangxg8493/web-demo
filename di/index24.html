@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>DIDI TEST24-should throw error if forced provider does not exist</h1>
+<script src="/lib/didi/10.2.2/lib.js"></script>
+
+<script language="JavaScript">
+    const injector = new Injector([]);
+    try {
+        injector.createChild([], ['b'])
+    } catch (e) {
+        console.log(e)
+    }
+</script>
+
+</body>
+</html>

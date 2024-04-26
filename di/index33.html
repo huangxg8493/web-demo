@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>DIDI TEST33-override-should replace definition via override module</h1>
+<script src="/lib/didi/10.2.2/lib.js"></script>
+
+<script language="JavaScript">
+    class Foo {
+        constructor(bar1, baz1) {
+            this.bar = bar1;
+            this.baz = baz1;
+        }
+    }
+
+    function createBlub(foo1) {
+        return foo1;
+    }
+
+    const base = {
+        foo: ['type', ['bar', 'baz', Foo]],
+        blub: ['factory', ['foo', createBlub]],
+        baz: ['value', 'baz-value'],
+        abc: ['value', 'abc-value']
+    }
+
+    const extension = {
+        foo: ['type', ['baz', 'abc', Foo]]
+    }
+
+    const injector = new Injector([base, extension]);
+    const expectedFoo = {
+        bar: 'baz-value',
+        baz: 'abc-value'
+    };
+
+    var foo = injector.get('foo');
+    console.log(foo, foo === expectedFoo)
+
+    var blub = injector.get('blub');
+    console.log(blub, blub == expectedFoo)
+</script>
+
+</body>
+</html>

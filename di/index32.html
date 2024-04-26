@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>DIDI TEST32-scopes-should force new instances per scope</h1>
+<script src="/lib/didi/10.2.2/lib.js"></script>
+
+<script language="JavaScript">
+    function Foo() {
+    }
+
+    Foo.$scope = ['request'];
+
+    function createBar() {
+        return {};
+    }
+
+    createBar.$scope = ['session'];
+
+    const injector = new Injector([
+        {
+            'foo': ['type', Foo],
+            'bar': ['factory', createBar]
+        }
+    ])
+    const foo = injector.get('foo');
+    const bar = injector.get('bar');
+
+    const sessionInjector = injector.createChild([], ['session']);
+    console.log(foo, sessionInjector.get('foo'), foo === sessionInjector.get('foo'))// true
+    console.log(bar, sessionInjector.get('bar'), foo === sessionInjector.get('bar'))// false
+
+    const requestInjector = injector.createChild([], ['request']);
+
+    console.log(foo, requestInjector.get('foo'), foo === requestInjector.get('foo'))// false
+    console.log(bar, requestInjector.get('bar'), bar === requestInjector.get('bar'))// true
+</script>
+
+</body>
+</html>

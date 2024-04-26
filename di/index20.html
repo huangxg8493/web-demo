@@ -5,30 +5,25 @@
     <title>Title</title>
 </head>
 <body>
-<h1>DIDI TEST19-should inject from child</h1>
+<h1>DIDI TEST20-should inject from parent if not provided in child</h1>
 <script src="/lib/didi/10.2.2/lib.js"></script>
 
 <script language="JavaScript">
     const moduleParent = {
         a: ['value', 'a-parent']
-    };
-
+    }
     const moduleChild = {
-        a: ['value', 'a-child'],
-        d: ['value', 'd-child']
-    };
+        b: ['factory', function (a) {
+            return {
+                a: a
+            };
+        }]
+    }
 
     const injector = new Injector([moduleParent]);
     const child = injector.createChild([moduleChild]);
-
     console.log(injector.get('a'))
-    console.log(child.get('a'))
-    console.log(child.get('d'))
-
-    // should provide the child injector as "injector"
-    const p = new Injector([]);
-    const c = p.createChild([]);
-    console.log(c.get('injector'), c === c.get('injector'))
+    console.log(child.get('b'), child.get('b').a === injector.get('a'))
 </script>
 
 </body>

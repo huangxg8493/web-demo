@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>DIDI TEST29-additional __modules__-should re-use</h1>
+<script src="/lib/didi/10.2.2/lib.js"></script>
+
+<script language="JavaScript">
+    const otherModule = {
+        'bar': ['value', {}]
+    }
+
+    const injector = new Injector([
+        otherModule,
+        {
+            __exports__: ['foo'],
+            __modules__: [otherModule],
+            'foo': ['factory',
+                function (bar) {
+                    return {
+                        bar: bar
+                    };
+                }
+            ]
+        }
+    ])
+    const foo = injector.get('foo')
+    console.log(foo)
+    var b = injector.get('bar')
+    console.log(foo.bar, b, foo.bar === b)
+</script>
+
+</body>
+</html>

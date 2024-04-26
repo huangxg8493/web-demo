@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>DIDI TEST31-should only create one private child injector</h1>
+<script src="/lib/didi/10.2.2/lib.js"></script>
+
+<script language="JavaScript">
+    const injector = new Injector([
+        {
+            __exports__: ['foo', 'bar'],
+            'foo': ['factory',
+                function (bar) {
+                    return {
+                        bar: bar
+                    };
+                }
+            ],
+            'bar': ['factory',
+                function (internal) {
+                    return {
+                        internal: internal
+                    };
+                }
+            ],
+            'internal': ['factory',
+                function () {
+                    return {};
+                }
+            ]
+        }
+    ])
+
+    const foo = injector.get('foo');
+    const bar = injector.get('bar');
+    const childInjector = injector.createChild([], ['foo', 'bar']);
+    const fooFromChild = childInjector.get('foo');
+    const barFromChild = childInjector.get('bar');
+
+    console.log(fooFromChild, foo, foo === fooFromChild)
+    console.log(barFromChild, bar, bar === barFromChild)
+    console.log(fooFromChild.bar, barFromChild, fooFromChild.bar === barFromChild)
+</script>
+
+</body>
+</html>

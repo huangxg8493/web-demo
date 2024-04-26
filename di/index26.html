@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>DIDI TEST26-should allow name collisions in private bindings</h1>
+<script src="/lib/didi/10.2.2/lib.js"></script>
+
+<script language="JavaScript">
+    const injector = new Injector([
+        {
+            __exports__: ['foo'],
+            'foo': ['factory',
+                function (conflict) {
+                    return conflict;
+                }
+            ],
+            'conflict': ['value', 'private-from-a']
+        },
+        {
+            __exports__: ['bar'],
+            'bar': ['factory',
+                function (conflict) {
+                    return conflict;
+                }
+            ],
+            'conflict': ['value', 'private-from-b']
+        }
+    ]);
+
+    console.log(injector.get('foo'))
+    console.log(injector.get('bar'))
+</script>
+
+</body>
+</html>

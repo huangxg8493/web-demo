@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>DIDI TEST22-should force new instance in child</h1>
+<script src="/lib/didi/10.2.2/lib.js"></script>
+
+<script language="JavaScript">
+    const moduleParent = {
+        b: ['factory', function (c) {
+            return {
+                c: c
+            };
+        }],
+        c: ['value', 'c-parent']
+    }
+    const injector = new Injector([moduleParent]);
+    console.log(injector.get('b'), injector.get('b').c === injector.get('c'))
+
+    const moduleChild = {
+        c: ['value', 'c-child']
+    };
+
+    const child = injector.createChild([moduleChild], ['b']);
+    console.log(child.get('b'), child.get('b').c)
+</script>
+
+</body>
+</html>
