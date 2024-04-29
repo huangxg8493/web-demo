@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>DIDI TEST39-module dependencies (__depends__)-should load in reverse order</h1>
+<script src="/lib/didi/10.2.2/lib.js"></script>
+
+<script language="JavaScript">
+    const loaded = [];
+
+    // given
+    const injector = new Injector([
+        {
+            __depends__: [
+                {
+                    __depends__: [
+                        {
+                            __init__: [function () {
+                                loaded.push('L2_A');
+                            }]
+                        },
+                        {
+                            __init__: [function () {
+                                loaded.push('L2_B');
+                            }]
+                        }
+                    ],
+                    __init__: [function () {
+                        loaded.push('L1');
+                    }]
+                }
+            ],
+            __init__: [function () {
+                loaded.push('ROOT');
+            }]
+        }
+    ]);
+
+    // when
+    injector.init();
+
+    // then
+    console.log(loaded)
+</script>
+
+</body>
+</html>

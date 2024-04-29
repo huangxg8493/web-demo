@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>DIDI TEST37-private modules-should init with child injector</h1>
+<script src="/lib/didi/10.2.2/lib.js"></script>
+
+<script language="JavaScript">
+    const privateBar = {};
+
+    const injector = new Injector([
+        {
+            __exports__: ['publicFoo'],
+            __init__: [function (privateBar) {
+                privateBar.initialized = true;
+            }],
+            'publicFoo': ['factory',
+                function (privateBar) {
+                    return {
+                        privateBar
+                    };
+                }
+            ],
+            'privateBar': ['value', {}]
+        }
+    ]);
+
+    // when
+    injector.init();
+
+    const publicFoo = injector.get('publicFoo');
+    console.log(publicFoo.privateBar.initialized)
+</script>
+
+</body>
+</html>

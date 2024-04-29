@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>DIDI TEST40-module dependencies (__depends__)-should de-duplicate</h1>
+<script src="/lib/didi/10.2.2/lib.js"></script>
+
+<script language="JavaScript">
+    const loaded = [];
+
+    const duplicateModule = {
+        __init__: [function () {
+            loaded.push('DUP')
+        }]
+    }
+    // given
+    const injector = new Injector([
+        {
+            __depends__: [
+                {
+                    __depends__: [
+                        duplicateModule,
+                        duplicateModule
+                    ],
+                    __init__: [function () {
+                        loaded.push('L1');
+                    }]
+                },
+                duplicateModule
+            ],
+            __init__: [function () {
+                loaded.push('ROOT');
+            }]
+        }
+    ]);
+
+    // when
+    injector.init();
+
+    // then
+    console.log(loaded)
+</script>
+
+</body>
+</html>

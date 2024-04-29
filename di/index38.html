@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>DIDI TEST38-error handling-should indicate missing dependency</h1>
+<script src="/lib/didi/10.2.2/lib.js"></script>
+
+<script language="JavaScript">
+    // given
+    const injector = new Injector([
+        {
+            __init__: ['foo']
+        }
+    ]);
+    try {
+        console.log(injector.init())
+    } catch (e) {
+        console.log(e)//No provider for "foo"!
+    }
+
+    const injector2 = new Injector([
+        {
+            __init__: [function () {
+                throw new Error('INIT ERROR');
+            }]
+        }
+    ]);
+    try {
+        console.log(injector2.init())
+    } catch (e) {
+        console.log(e)//No provider for "foo"!
+    }
+</script>
+
+</body>
+</html>
